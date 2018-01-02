@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JavaScript Drum Kit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+  <link rel="stylesheet" href="style/custom.css">
+
+</head>
+<body>
+
+  <h5 class="has-text-white-bis subtitle day">Day 1</h5>
+
+  <section class="section">
+    <h1 class="has-text-white-bis title has-text-centered">JavaScript Drum Kit</h1>
+  </section>
+
+  <div class="columns keys">
+    <div data-key="65" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">A</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">clap</p>
+    </div>
+    <div data-key="83" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">S</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">hihat</p>
+    </div>
+    <div data-key="68" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">D</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">kick</p>
+    </div>
+    <div data-key="70" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">F</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">openhat</p>
+    </div>
+    <div data-key="71" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">G</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">boom</p>
+    </div>
+    <div data-key="72" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">H</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">ride</p>
+    </div>
+    <div data-key="74" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">J</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">snare</p>
+    </div>
+    <div data-key="75" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">K</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">tom</p>
+    </div>
+    <div data-key="76" class="column keys__button">
+      <h6 class="has-text-white-bis has-text-centered">L</h6>
+      <p class="has-text-centered has-text-weight-light keys__name has-text-warning">think</p>
+    </div>
+  </div>
+
+  <audio data-key="65" src="assets/clap.wav"></audio>
+  <audio data-key="83" src="assets/hihat.wav"></audio>
+  <audio data-key="68" src="assets/kick.wav"></audio>
+  <audio data-key="70" src="assets/openhat.wav"></audio>
+  <audio data-key="71" src="assets/boom.wav"></audio>
+  <audio data-key="72" src="assets/ride.wav"></audio>
+  <audio data-key="74" src="assets/snare.wav"></audio>
+  <audio data-key="75" src="assets/tom.wav"></audio>
+  <audio data-key="76" src="assets/tink.wav"></audio>
+
+  <script>
+    window.addEventListener('keydown', playSound);
+    
+    const keys = document.querySelectorAll('.keys__button');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+    function playSound(event) {
+      const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+      const key = document.querySelector(`.keys__button[data-key="${event.keyCode}"]`);
+      if(!audio) return;
+      audio.currentTime = 0;
+      audio.play();
+      key.classList.add('keys__button--playing');
+    }
+
+    function removeTransition(event) {
+      if(event.propertyName !== 'transform') return;
+      event.target.classList.remove('keys__button--playing');
+    }
+  </script>
+
+</body>
+</html>

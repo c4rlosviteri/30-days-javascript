@@ -1,0 +1,41 @@
+body {
+  background: url('../assets/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-size: 16px;
+  height: 100vh;
+  margin: 0;
+}
+
+.day {
+  background: rgba(0, 0, 0, .7);
+  text-align: center;
+  padding: 1rem;
+  width: 6rem;
+}
+
+.keys {
+  font-size: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  max-width: 60rem;
+}
+
+.keys__button {
+  border: 2px dashed white;
+  border-radius: .5rem;
+  margin: 0 .5rem;
+  transition: all .1s ease;
+}
+
+.keys__button--playing {
+  border: 2px solid #ffdd57;
+  border-radius: .5rem;
+  box-shadow: 0 0 .5rem #ffdd57;
+  margin: 0 .5rem;
+  transform: scale(1.15);
+}
+
+.keys__name {
+  font-size: 1rem
+}
