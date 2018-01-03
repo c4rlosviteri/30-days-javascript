@@ -9,6 +9,7 @@ body {
 
 .day {
   background: rgba(0, 0, 0, .7);
+  display: inline-block;
   text-align: center;
   padding: 1rem;
   width: 6rem;

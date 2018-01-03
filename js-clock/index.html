@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>JavaScript Clock</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+  <style>
+    body {
+      background: #193549;
+      color: #fff;
+      font-family: "Roboto";
+      font-size: 16px;
+      margin: 0;
+    }
+    .clock {
+      border: .5rem solid #fff;
+      border-radius: 50%;
+      box-sizing: border-box;
+      height: 12rem;
+      margin: 4rem auto;
+      padding: .5rem;
+      position: relative;
+      width: 12rem;
+    }
+    .clock__center {
+      background: #fff;
+      border-radius: 50%;
+      height: 1.5rem;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      width: 1.5rem;
+    }
+    .clock__hand {
+      background: #fff;
+      height: .5rem;
+      position: absolute;
+      transform-origin: 100%; 
+      transition: all .1s;
+      transition-timing-function: cubic-bezier(0.1, 2.5, 0.5, 1);
+      top: calc(50% - .25rem);
+    }
+    .clock__hand--hours {
+      left: 15%;
+      width: calc(40% - .5rem);
+    }
+    .clock__hand--minutes {
+      height: .375rem;
+      left: 10%;
+      margin-top: .0625rem;
+      width: calc(45% - .5rem);
+    }
+    .clock__hand--seconds {
+      height: .125rem;
+      margin-top: .15625rem;
+      width: calc(50% - .5rem);
+    }
+    .day {
+      background: rgba(0, 0, 0, .5);
+      box-sizing: border-box;
+      display: inline-block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 1rem;
+      text-align: center;
+      width: 6rem;
+    }
+    .title {
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+
+  <h5 class="day">
+    Day 2
+  </h5>
+  <h1 class="title">
+    JavaScript Clock
+  </h1>
+
+  <div class="clock">
+    <div class="clock__center"></div>
+    <div class="clock__hand clock__hand--hours"></div>
+    <div class="clock__hand clock__hand--minutes"></div>
+    <div class="clock__hand clock__hand--seconds"></div>
+  </div>
+
+  <script>
+    const secondsHand = document.querySelector('.clock__hand--seconds');
+    const minutesHand = document.querySelector('.clock__hand--minutes');
+    const hoursHand = document.querySelector('.clock__hand--hours');
+
+    function setDate() {
+      const now = new Date();
+
+      const seconds = now.getSeconds();
+      const secondsDegree = (seconds * 6) + 90;
+
+      const minutes = now.getMinutes();
+      const minutesDegree = (minutes * 6) + 90;
+
+      const hours = now.getHours();
+      const hoursNormalized = (hours > 13 ? hours - 12 : hours);
+      const hoursDegree = (hoursNormalized * 30) + 90;
+
+      secondsHand.style.transform = `rotate(${secondsDegree}deg)`;
+      minutesHand.style.transform = `rotate(${minutesDegree}deg)`;
+      hoursHand.style.transform = `rotate(${hoursDegree}deg)`;
+    }
+
+    setInterval(setDate, 1000);
+  </script>
+
+</body>
+</html>
