@@ -108,7 +108,7 @@
       const minutesDegree = (minutes * 6) + 90;
 
       const hours = now.getHours();
-      const hoursNormalized = (hours > 13 ? hours - 12 : hours);
+      const hoursNormalized = (hours <= 12 ? hours - 12 : hours);
       const hoursDegree = (hoursNormalized * 30) + 90;
 
       secondsHand.style.transform = `rotate(${secondsDegree}deg)`;
