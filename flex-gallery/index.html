@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>CSS Gallery Flexbox</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+ 
+  <style>
+    body {
+      box-sizing: border-box;
+      color: #fff;
+      font-family: 'Amatic SC';
+      font-size: 20px;
+      margin: 0;
+    }
+    *, *:after, *:before {
+      box-sizing: inherit;
+    }
+    .day {
+      background: rgba(0, 0, 0, .3);
+      font-size: 1.25rem;
+      margin: 0;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+    }
+    .panels {
+      display: flex;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .panels__elem {
+      background: #08c;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      flex-direction: column;
+      transition:
+        background 0.2s,
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11);
+    }
+    .panels__elem:nth-of-type(1) {
+      background-image: url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); 
+    }
+    .panels__elem:nth-of-type(2) {
+      background-image: url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); 
+    }
+    .panels__elem:nth-of-type(3) {
+      background-image: url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); 
+    }
+    .panels__elem:nth-of-type(4) {
+      background-image: url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); 
+    }
+    .panels__elem:nth-of-type(5) {
+      background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); 
+    }
+    .panels__elem > * {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      flex: 1 0 auto;
+      margin: 0;
+      transition: transform 0.5s;
+      width: 100%;
+    }
+    .panels__elem p {
+      font-size: 2em;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, .5);
+    }
+    .panels__elem p:nth-child(2) {
+      font-size: 4em;
+    }
+    .panels__elem p:first-child {
+      transform: translateY(-100%);
+    }
+    .panels__elem p:last-child {
+      transform: translateY(100%);
+    }
+    .panels__elem.open-active p:first-child, .panels__elem.open-active p:last-child {
+      transform: translateY(0%);
+    }
+    .panels__elem.open {
+      flex: 5;
+      font-size: 2rem;
+    }
+  </style>
+
+</head>
+<body>
+
+  <h5 class="day">Day 3</h5>
+  <div class="panels">
+    <div class="panels__elem">
+      <p>Hey</p>
+      <p>Let's</p>
+      <p>Dance</p>
+    </div>
+    <div class="panels__elem">
+      <p>Give</p>
+      <p>Take</p>
+      <p>Receive</p>
+    </div>
+    <div class="panels__elem">
+      <p>Experience</p>
+      <p>It</p>
+      <p>Today</p>
+    </div>
+    <div class="panels__elem">
+      <p>Give</p>
+      <p>All</p>
+      <p>You can</p>
+    </div>
+    <div class="panels__elem">
+      <p>Life</p>
+      <p>In</p>
+      <p>Motion</p>
+    </div>
+  </div>
+
+  <script>
+    
+    const panels = document.querySelectorAll('.panels__elem');
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleOpenActive));
+
+    function toggleOpen() {
+      this.classList.toggle('open');
+    }
+
+    function toggleOpenActive(e) {
+      if(e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+
+  </script>
+
+</body>
+</html>
