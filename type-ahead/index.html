@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX type ahead</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <style>
+    :root {
+      --main: #ffcd37;
+    }
+    body {
+      background-color: var(--main);
+      font-family: "Source Sans Pro";
+      margin: 0;
+      padding: 0;
+    }
+    form {
+      margin: 3rem auto;
+      width: 22rem;
+    }
+    input[type="text"] {
+      border: .75rem solid #fafafa;
+      border-radius: .125rem;
+      box-sizing: border-box;
+      box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, .125);
+      font-family: inherit;
+      font-size: 1.5rem;
+      max-width: 100%;
+      padding: 1rem 1.5rem;
+      outline: none;
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      margin: 1.5px auto;
+      padding: 0;
+      width: 18rem;
+    }
+    ul > li {
+      box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, .125);
+      display: flex;
+      justify-content: space-between;
+      padding: .875rem 1rem;
+    }
+    ul > li:last-child {
+      border: none;
+    }
+    ul > li:nth-child(even) {
+      background: linear-gradient(to bottom, #fff 0%, #eaeaea 100%);
+      transform: perspective(100px) rotateX(3deg) translateY(-2px) scale(1.001);
+    }
+    ul > li:nth-child(odd) {
+      background: linear-gradient(to bottom, #eaeaea 0%, #fff 100%);
+      transform: perspective(100px) rotateX(-3deg) translateY(-1.25px);
+    }
+    ul > li > .population {
+      font-size: .75rem;
+    }
+    .day {
+      background: #000;
+      color: var(--main);
+      font-size: 1.25rem;
+      margin: 0;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+    }
+    .hl {
+      background-color: var(--main);
+    }
+    .population {
+      background-color: #ddd;
+      border-radius: 2px;
+      padding: .25rem;
+    }
+  </style>
+</head>
+<body>
+  <h5 class="day">Day 5</h5>
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or state">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+    const cities = [];
+
+    fetch(endpoint)
+      .then(blob => blob.json())
+      .then(data => cities.push(...data))
+
+    function findMatches (wordToMatch) {
+      return cities.filter(place => {
+        const regex = new RegExp(wordToMatch, 'gi');
+        return place.city.match(regex) || place.state.match(regex);
+      });
+      console.log(this.value)
+    }
+
+    const searchInput = document.querySelector('.search');
+    const suggestions = document.querySelector('.suggestions');
+
+    searchInput.addEventListener('change', displayMatches);
+    searchInput.addEventListener('keyup', displayMatches);
+
+    function displayMatches () {
+      const matchArray = findMatches(this.value);
+      const html = matchArray.map(place => {
+        const regex = new RegExp(this.value, 'gi');
+        const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+        const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+        return `
+          <li>
+            <span class="name">${cityName}, ${stateName}</span>
+            <span class="population">${numberWithCommas(place.population)}</span>
+          </li>
+        `
+      }).join('');
+      suggestions.innerHTML = html;
+    }
+
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  </script>
+
+</body>
+</html>
