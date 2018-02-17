@@ -3,6 +3,8 @@
 
 ### Projects
 
+Live demo: <https://c4rlosviteri.github.io/30-days-javascript/>  
+
 **Day 1:** [Drum Kit](./js-drum-kit/index.html)  
 **Day 2:** [JS Clock](./js-clock/index.html)  
 **Day 3:** [CSS Variables](./css-variables/index.html)  
