@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Cardio 💪💪</title>
+  <style>
+    body {
+      background: #ffcd37;
+      color: #fff;
+      font-family: "Roboto";
+      font-size: 16px;
+      margin: 0;
+    }
+    h5 {
+      background: black;
+      font-size: 1.125rem;
+      display: inline;
+      line-height: 48px;
+      padding: 1rem;
+      text-align: center;
+      text-transform: uppercase;
+      width: 6rem;
+    }
+    h1 {
+      margin-top: 3rem;
+    }
+    h1, p {
+      color: black;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h5>Day 7</h5>
+  <h1>Array Cardio 💪💪</h1>
+  <p>Open the console to see some magic</p>
+  <script>
+    const pets = [
+      { name: 'Oddie', year: 2015 },
+      { name: 'Leo', year: 2015 },
+      { name: 'Sofi', year: 2018 },
+      { name: 'Nena', year: 2016 }
+    ];
+
+    const comments = [
+      { text: 'Love this!', id: 523423 },
+      { text: 'Super good', id: 823423 },
+      { text: 'You are the best', id: 2039842 },
+      { text: 'Ramen is my fav food ever', id: 123523 },
+      { text: 'Nice Nice Nice!', id: 542328 }
+    ];
+
+    // --------------------------------- //
+
+    console.table(pets);
+
+    // Array.prototype.some checks for at least one match
+    const someAdultPet = pets.some(pet => (new Date()).getFullYear() - pet.year >= 1);
+
+    console.log({someAdultPet});
+
+    // Array.prototype.every checks for all matches
+    const allAdultPet = pets.every(pet => (new Date()).getFullYear() - pet.year >= 1);
+
+    console.log({allAdultPet});
+
+    // --------------------------------- //
+
+    console.table(comments);
+
+    // find is like filter, but instead returns just the one you are looking for
+    // find the comment with the ID of 823423
+    const findComment = comments.find(comment => comment.id === 823423);
+
+    console.log(findComment);
+
+    // Array.prototype.findIndex()
+    // find the comment with this ID
+
+    const commentIndex = comments.findIndex(comment => comment.id === 823423);
+
+    console.log(commentIndex);
+
+    // delete the comment with the ID of 823423
+    //comments.splice(commentIndex, 1);
+
+    const newComments = [
+      ...comments.slice(0, commentIndex),
+      ...comments.slice(commentIndex + 1)
+    ];
+
+    //console.table(comments);
+    console.table(newComments);
+  </script>
+</body>
+</html>

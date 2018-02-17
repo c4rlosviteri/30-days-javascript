@@ -98,7 +98,6 @@
         const regex = new RegExp(wordToMatch, 'gi');
         return place.city.match(regex) || place.state.match(regex);
       });
-      console.log(this.value)
     }
 
     const searchInput = document.querySelector('.search');
@@ -123,7 +122,7 @@
       suggestions.innerHTML = html;
     }
 
-    function numberWithCommas(x) {
+    function numberWithCommas (x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   </script>
